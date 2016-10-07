@@ -3,17 +3,17 @@ import re
 from bs4 import BeautifulSoup
 
 tainia=raw_input("Give me the title:")
-url = 'http://www.omdbapi.com/?t=' + str(tainia)
-source= requests.get(url)
-lel = source.text
-keimeno1 = BeautifulSoup(lel)
-keimeno = str(keimeno1)
-a= keimeno.find("imdbRating")
-b = str(keimeno[a+13]) + str(keimeno[a+14]) + str(keimeno[a+15])
+url = 'http://www.omdbapi.com/?t=' + str(tainia)   
+source= requests.get(url)                        #In this step we copied the source code of the url and put it in the variable "source"
+lel = source.text                                #we stored in "lel" only text content that we needed from the source code of the page
+keimeno1 = BeautifulSoup(lel)                    #In this step keimeno1 becomes a beautifulsoup object
+keimeno = str(keimeno1)                          #and here keimeno's content becomes string
+a= keimeno.find("imdbRating")                                    #Now I search the text for the term "imdbrating" and i find the position (a) of the 1st letter "i"
+b = str(keimeno[a+13]) + str(keimeno[a+14]) + str(keimeno[a+15]) # I add 13,14,15 positions into (a) and that means a+13,a+14,a+15 are the positions of the score
 print "IMDB Rating: " + b
-c = keimeno.find("Awards")
-d = keimeno.find('","Poster"')
+c = keimeno.find("Awards")           #In the same way i locate the awards but now i dont know the exact length of the characters because each movie has different award than another
+d = keimeno.find('","Poster"')       #So I locate the next common term on the text and I print the in between 
 vraveia = ""
 for g in range(c+9,d):
 	vraveia = vraveia+ keimeno[g]
-print "Awards: " + re.sub("&amp;", "&",vraveia)
+print "Awards: " + re.sub("&amp;", "&",vraveia)      # For some reason cmd couldnt print "&" and instead printed "&amp;". Now it works fine
