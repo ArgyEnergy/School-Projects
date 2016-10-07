@@ -1,0 +1,25 @@
+"""
+f(123): 1*2*3=6 Output: 1
+f(4) Output: 1
+f(39): 3*9 = 27 -> 2*7 = 14-> 1*4=4 Output: 3
+f(999) => 9*9*9 = 729-> 7*2*9 = 126-> 1*2*6 = 12-> 1*2 = 2 Output: 4
+"""
+
+
+def multiplier(x):
+	counter=1
+	digits = map(int,str(x)) #I add the digits of the number x as integers on an array(digits) 
+	if(len(digits) == 1):  #Obviously a 1digit number returns 1
+		return 1
+	while True:
+		a=1
+		for i in range(0,len(digits)): #I multiply each digit of the array and I put the result 
+			a=a*digits[i]                #into an another array (temp)
+			temp= map(int,str(a))
+		if(len(temp) != 1):            #The loop continues till the length of array(temp) becomes 1
+			counter = counter + 1        
+			digits = map(int,str(a))
+		else:
+			return counter              #The function returns counter and that should give us how many times 
+x=input("Give me a number:")      #we multiplied our given number so that it would become a 1 digit number
+print multiplier(x)
