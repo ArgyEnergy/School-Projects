@@ -1,0 +1,28 @@
+"""
+This code prints "True" of "False" whether a number
+is the result of an integer squared without using the Math library!
+e.g Given Number:16
+    Output:True 
+    Because 4^2=16
+    
+    Given Number:22
+    Output:False 
+    Because 4^2=16, 5^2=25 There is no integer that squared becomes 22.
+"""
+
+
+def sqrt(x):
+	last_guess= x/2.0                                           #This code is a mathematical way to find a squared root! 
+	while True:
+		guess = (last_guess + x/last_guess)/2
+		if abs(guess - last_guess) < .000001: # example threshold
+			return int(guess)                                      #It returns only the intgral part of the number e.g sqrt(32)=5
+		last_guess = guess                                       #Even though sqrt(32)=5.6568...
+		
+x= input("Give me a number: ")
+if ( sqrt(x) * sqrt(x) == x) :                              #Since it returns only the integral part of the number the "if" part is pretty obvious
+	print("True")
+else:
+	 print ("False")
+
+    
